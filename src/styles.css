@@ -1,0 +1,47 @@
+/* src/styles.css */
+body {
+    background-color: #eaeaea; /* Light gray background */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    height: 100vh; /* Full height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  /* src/styles.css */
+.converter-box {
+    background-color: #ffffff; /* White background for the box */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 2rem; /* Padding inside the box */
+    width: 100%; /* Responsive width */
+    max-width: 600px; /* Increased max width for larger screens */
+    text-align: center; /* Center text */
+  }
+  
+  
+  /* src/styles.css */
+h1 {
+    color: #3f51b5; /* Primary color */
+    margin-bottom: 1rem; /* Space below the title */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  
+  button {
+    margin-top: 1rem; /* Space above buttons */
+  }
+  
+  input[type='file'] {
+    display: none; /* Hide the default file input */
+  }
+  
+  label {
+    margin-top: 1rem; /* Space above the upload button */
+  }
+  
+  .snackbar {
+    background-color: #3f51b5; /* Snackbar background color */
+  }
+  
