@@ -1,11 +1,16 @@
 // src/HeicToJpgConverter.jsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import heic2any from 'heic2any';
 import {
+  Container,
   Typography,
   Button,
   Snackbar,
   CircularProgress,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 
 const HeicToJpgConverter = () => {
@@ -13,6 +18,7 @@ const HeicToJpgConverter = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [outputFormat, setOutputFormat] = useState('image/jpeg'); // Default to JPG
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -34,14 +40,14 @@ const HeicToJpgConverter = () => {
     try {
       const convertedBlob = await heic2any({
         blob: file,
-        toType: 'image/jpeg',
+        toType: outputFormat,
         quality: 0.8,
       });
 
       const url = URL.createObjectURL(convertedBlob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${file.name.split('.').slice(0, -1).join('.')}.jpg`;
+      a.download = `${file.name.split('.').slice(0, -1).join('.')}.${outputFormat.split('/')[1]}`; // Use the selected format
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -57,7 +63,7 @@ const HeicToJpgConverter = () => {
   return (
     <div className="converter-box">
       <Typography variant="h4" gutterBottom>
-        🚀 HEIC to JPG Converter
+        🚀 HEIC to Image Converter
       </Typography>
       <input
         type="file"
@@ -73,13 +79,28 @@ const HeicToJpgConverter = () => {
       <Typography variant="body1" style={{ margin: '1rem 0' }}>
         {file ? file.name : 'No file selected'}
       </Typography>
+
+      <FormControl fullWidth style={{ marginBottom: '1rem' }}>
+        <InputLabel id="output-format-label">Output Format</InputLabel>
+        <Select
+          labelId="output-format-label"
+          value={outputFormat}
+          onChange={(e) => setOutputFormat(e.target.value)}
+        >
+          <MenuItem value="image/jpeg">JPG</MenuItem>
+          <MenuItem value="image/png">PNG</MenuItem>
+          <MenuItem value="image/gif">GIF</MenuItem>
+          {/* Add more formats as needed */}
+        </Select>
+      </FormControl>
+
       <Button
         variant="contained"
         color="secondary"
         onClick={handleConvert}
         disabled={!file || loading}
       >
-        {loading ? <CircularProgress size={24} /> : 'Convert to JPG'}
+        {loading ? <CircularProgress size={24} /> : 'Convert to Image'}
       </Button>
       <Snackbar
         open={!!error}
