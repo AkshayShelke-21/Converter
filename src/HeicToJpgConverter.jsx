@@ -1,8 +1,7 @@
 // src/HeicToJpgConverter.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import heic2any from 'heic2any';
 import {
-  Container,
   Typography,
   Button,
   Snackbar,
